@@ -62,22 +62,23 @@
 
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 py-3">
-            <div class="flex justify-between items-center">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-center items-center relative">
                 <a href="#" class="flex items-center">
+                    <img src="logo.jpeg" alt="Logo du cabinet" class="h-16 w-16 mr-4">
                     <div>
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                            <h2 class="text-lg sm:text-xl font-bold text-gray-900 whitespace-nowrap">Dr. AMINE KHADIRI</h2>
-                            <h2 class="text-lg sm:text-xl font-cairo font-bold text-gray-900 whitespace-nowrap sm:ml-3">د. أمين خديـري</h2>
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-bold text-gray-900 whitespace-nowrap">Dr. AMINE KHADIRI</h2>
+                            <h2 class="text-xl font-cairo font-bold text-gray-900 whitespace-nowrap ml-3">د. أمين خديـري</h2>
                         </div>
                         <div class="border-t-2 border-red-700 my-1"></div>
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                            <p class="text-xs sm:text-sm font-semibold text-gray-500 whitespace-nowrap">CABINET DE CARDIOLOGIE</p>
-                            <p class="text-sm sm:text-md font-cairo font-semibold text-gray-500 whitespace-nowrap sm:ml-3">عيادة أمراض القلب و الشرايين</p>
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-gray-500 whitespace-nowrap">CABINET DE CARDIOLOGIE</p>
+                            <p class="text-md font-cairo font-semibold text-gray-500 whitespace-nowrap ml-3">عيادة أمراض القلب و الشرايين</p>
                         </div>
                     </div>
                 </a>
-                <button id="mobile-menu-button" class="lg:hidden p-2"><i class="fas fa-bars text-2xl"></i></button>
+                <button id="mobile-menu-button" class="lg:hidden p-2 absolute right-0 top-1/2 -translate-y-1/2"><i class="fas fa-bars text-2xl"></i></button>
             </div>
             <nav class="hidden lg:flex justify-center items-center space-x-8 text-gray-600 pt-4 border-t mt-3">
                 <a href="#a-propos" class="nav-link hover:brand-red transition">À Propos</a>
@@ -86,7 +87,7 @@
                 <a href="#cabinet" class="nav-link hover:brand-red transition">Le Cabinet</a>
                 <a href="#avis" class="nav-link hover:brand-red transition">Avis</a>
                 <a href="#contact" class="nav-link hover:brand-red transition">Contact</a>
-                <a href="#contact" class="nav-link brand-red-bg text-white font-bold px-6 py-2 rounded-full hover:bg-red-800 transition shadow-lg hover:shadow-xl ml-4">Rendez-vous</a>
+                <a href="#rdv-calendar" class="nav-link brand-red-bg text-white font-bold px-6 py-2 rounded-full hover:bg-red-800 transition shadow-lg hover:shadow-xl ml-4">Rendez-vous</a>
             </nav>
         </div>
         <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
@@ -135,7 +136,7 @@
         <section id="a-propos" class="py-20 md:py-32 reveal">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
                 <div class="md:w-1/3">
-                    <img src="https://images.unsplash.com/photo-1588776814546-1ff6bc1a45b2?q=80&w=1974&auto=format&fit=crop" alt="Portrait professionnel du Dr. Amine Khadiri" class="rounded-lg shadow-2xl w-full">
+                    <img src="docteur.jpeg" alt="Portrait professionnel du Dr. Amine Khadiri" class="rounded-lg shadow-2xl w-full">
                 </div>
                 <div class="md:w-2/3">
                     <h2 class="text-4xl font-bold text-gray-900">Dr. Amine Khadiri</h2>
@@ -253,10 +254,10 @@
                         <img id="main-gallery-image" src="https://placehold.co/800x600/e2e8f0/374151?text=Salle+d%27attente" alt="Image principale du cabinet" class="rounded-lg shadow-2xl w-full h-[500px] object-cover transition-all duration-300">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <img data-src="https://placehold.co/400x300/e2e8f0/374151?text=Salle+d%27attente" src="https://placehold.co/400x300/e2e8f0/374151?text=Salle+d%27attente" alt="Salle d'attente du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
-                        <img data-src="https://placehold.co/400x300/e2e8f0/374151?text=Accueil" src="https://placehold.co/400x300/e2e8f0/374151?text=Accueil" alt="Accueil du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
-                        <img data-src="https://placehold.co/400x300/e2e8f0/374151?text=Bureau" src="https://placehold.co/400x300/e2e8f0/374151?text=Bureau" alt="Bureau de consultation" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
-                        <img data-src="https://placehold.co/400x300/e2e8f0/374151?text=Équipement" src="https://placehold.co/400x300/e2e8f0/374151?text=Équipement" alt="Équipement médical" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="salle.jpeg" src="salle.jpeg" alt="Salle d'attente du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="accueil.jpeg" src="accueil.jpeg" alt="Accueil du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="bureau.jpeg" src="bureau.jpeg" alt="Bureau de consultation" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="echo.jpeg" src="echo.jpeg" alt="Équipement médical" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
                     </div>
                 </div>
             </div>
@@ -304,8 +305,8 @@
         <section id="contact" class="py-20 md:py-32 bg-gray-900 text-white reveal">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold">Contact & Rendez-vous</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Contactez-nous directement ou utilisez notre système de prise de rendez-vous en ligne.</p>
+                    <h2 class="text-4xl font-bold">Contact & Informations</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Retrouvez ici toutes nos coordonnées pour nous joindre ou vous rendre au cabinet.</p>
                 </div>
                 <div class="grid lg:grid-cols-2 gap-16 items-start">
                     <!-- Informations et Carte -->
@@ -338,9 +339,13 @@
                     </div>
 
                     <!-- Système de RDV -->
-                    <div class="bg-gray-800 p-8 rounded-lg" id="rdv-scheduler">
-                        <div id="rdv-app">
-                            <!-- Le calendrier et les créneaux seront injectés ici par le script -->
+                    <div id="rdv-calendar">
+                        <div class="bg-gray-800 p-8 rounded-lg">
+                            <h3 class="text-2xl font-bold mb-2 text-center">Prendre rendez-vous en ligne</h3>
+                            <p class="text-center text-gray-400 mb-6">Sélectionnez une date et un créneau. Vous serez ensuite redirigé vers WhatsApp pour confirmer.</p>
+                            <div id="rdv-app">
+                                <!-- Le calendrier et les créneaux seront injectés ici par le script -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -357,7 +362,7 @@
     
     <!-- Bouton flottant pour RDV sur mobile -->
     <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-900 p-4 z-50 shadow-lg">
-         <a href="#contact" class="nav-link w-full text-center brand-red-bg text-white font-bold px-6 py-3 rounded-full hover:bg-red-800 transition">
+         <a href="#rdv-calendar" class="nav-link w-full text-center brand-red-bg text-white font-bold px-6 py-3 rounded-full hover:bg-red-800 transition">
             Prendre Rendez-vous
         </a>
     </div>
@@ -365,6 +370,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- SCRIPTS GÉNÉRAUX ---
+            const header = document.querySelector('header');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenuButton && mobileMenu) {
@@ -380,7 +386,15 @@
                         if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
                             mobileMenu.classList.add('hidden');
                         }
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        const headerOffset = header.offsetHeight + 20; // 20px de marge
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: "smooth"
+                        });
                     }
                 });
             });
