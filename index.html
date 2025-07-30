@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Amine Khadiri - Cardiologue d'Excellence à Casablanca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&family=Cairo:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fdfdfd;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-cairo {
+            font-family: 'Cairo', sans-serif;
+        }
+        .brand-red { color: #b91c1c; }
+        .brand-red-bg { background-color: #b91c1c; }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .step-line {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            bottom: -2rem;
+            width: 2px;
+            background-color: #e5e7eb;
+            transform: translateX(-50%);
+        }
+        .calendar-date.selected {
+            background-color: #b91c1c !important;
+            color: white !important;
+            border-radius: 50%;
+        }
+        .time-slot.selected {
+            background-color: #1e293b !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-bold text-gray-900 whitespace-nowrap">Dr. AMINE KHADIRI</h2>
+                            <h2 class="text-xl font-cairo font-bold text-gray-900 whitespace-nowrap">د. أمين خديـري</h2>
+                        </div>
+                        <div class="border-t-2 border-red-700 my-1"></div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-gray-500 whitespace-nowrap">CABINET DE CARDIOLOGIE</p>
+                            <p class="text-md font-cairo font-semibold text-gray-500 whitespace-nowrap">عيادة أمراض القلب و الشرايين</p>
+                        </div>
+                    </div>
+                </a>
+                <button id="mobile-menu-button" class="lg:hidden p-2"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            <nav class="hidden lg:flex justify-center items-center space-x-8 text-gray-600 pt-4 border-t mt-3">
+                <a href="#a-propos" class="nav-link hover:brand-red transition">À Propos</a>
+                <a href="#soins" class="nav-link hover:brand-red transition">Nos Soins</a>
+                <a href="#visite" class="nav-link hover:brand-red transition">Votre Visite</a>
+                <a href="#cabinet" class="nav-link hover:brand-red transition">Le Cabinet</a>
+                <a href="#avis" class="nav-link hover:brand-red transition">Avis</a>
+                <a href="#contact" class="nav-link hover:brand-red transition">Contact</a>
+                <a href="#contact" class="nav-link brand-red-bg text-white font-bold px-6 py-2 rounded-full hover:bg-red-800 transition shadow-lg hover:shadow-xl ml-4">Rendez-vous</a>
+            </nav>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
+            <a href="#a-propos" class="nav-link block py-2 text-gray-600 hover:brand-red">À Propos</a>
+            <a href="#soins" class="nav-link block py-2 text-gray-600 hover:brand-red">Nos Soins</a>
+            <a href="#visite" class="nav-link block py-2 text-gray-600 hover:brand-red">Votre Visite</a>
+            <a href="#cabinet" class="nav-link block py-2 text-gray-600 hover:brand-red">Le Cabinet</a>
+            <a href="#avis" class="nav-link block py-2 text-gray-600 hover:brand-red">Avis</a>
+            <a href="#contact" class="nav-link block py-2 text-gray-600 hover:brand-red">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section text-white">
+            <div class="container mx-auto px-6 py-32 md:py-48 text-center flex flex-col items-center">
+                <h1 class="text-4xl md:text-7xl font-bold leading-tight">L'excellence en cardiologie, au service de votre cœur.</h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-200">Une approche médicale de pointe, alliée à une écoute humaine et personnalisée pour une santé cardiovasculaire optimale.</p>
+                <a href="#a-propos" class="nav-link mt-10 brand-red-bg text-white font-bold px-8 py-4 rounded-full hover:bg-red-800 transition shadow-lg hover:shadow-xl text-lg">En savoir plus</a>
+            </div>
+        </section>
+
+        <!-- Key Figures -->
+        <section class="bg-gray-50 reveal">
+            <div class="container mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="text-4xl font-bold brand-red">10+</p>
+                    <p class="text-gray-500 mt-2">Années d'expérience</p>
+                </div>
+                <div>
+                    <i class="fas fa-globe-europe text-4xl brand-red"></i>
+                    <p class="text-gray-500 mt-3">Expérience Internationale</p>
+                </div>
+                <div>
+                    <i class="fas fa-graduation-cap text-4xl brand-red"></i>
+                    <p class="text-gray-500 mt-3">Diplômes Européens & Marocains</p>
+                </div>
+                <div>
+                    <i class="fas fa-microscope text-4xl brand-red"></i>
+                    <p class="text-gray-500 mt-3">Technologie de pointe</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="a-propos" class="py-20 md:py-32 reveal">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <div class="md:w-1/3">
+                    <img src="docteur.jpeg&w=1974&auto=format&fit=crop" alt="Portrait professionnel du Dr. Amine Khadiri" class="rounded-lg shadow-2xl w-full">
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-4xl font-bold text-gray-900">Dr. Amine Khadiri</h2>
+                    <p class="brand-red font-semibold text-lg mt-2">Cardiologue passionné par l'innovation et le bien-être patient.</p>
+                    <p class="mt-6 text-gray-600 leading-relaxed">Fort d'une riche expérience acquise au sein d'établissements de renom, tant au Maroc qu'en Europe, notamment au CHU Ibn Sina de Rabat et dans les Hôpitaux de France, ma pratique est le fruit d'un parcours d'excellence. Titulaire de plusieurs diplômes de surspécialité, dont l'Imagerie Cardiaque Non-Invasive et la Cardiologie du Sport, ma mission est de vous offrir l'accès à une expertise de pointe et aux diagnostics les plus précis. Je conçois la cardiologie comme un partenariat fondé sur la confiance, où chaque patient bénéficie d'une approche préventive, personnalisée et résolument humaine pour la reconquête de sa santé.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Philosophy Section -->
+        <section id="philosophy" class="py-20 md:py-32 bg-gray-900 text-white reveal">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold">Notre Philosophie</h2>
+                <div class="mt-12 grid md:grid-cols-3 gap-12">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-red-700/20 p-5 rounded-full"><i class="fas fa-user-doctor text-3xl"></i></div>
+                        <h3 class="text-2xl font-bold mt-4">Expertise</h3>
+                        <p class="text-gray-400 mt-2">Une formation continue et une veille technologique constante pour vous offrir le meilleur de la cardiologie moderne.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-red-700/20 p-5 rounded-full"><i class="fas fa-comments text-3xl"></i></div>
+                        <h3 class="text-2xl font-bold mt-4">Écoute</h3>
+                        <p class="text-gray-400 mt-2">Chaque consultation est un moment d'échange privilégié pour comprendre vos besoins et répondre à vos inquiétudes.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-red-700/20 p-5 rounded-full"><i class="fas fa-microchip text-3xl"></i></div>
+                        <h3 class="text-2xl font-bold mt-4">Précision</h3>
+                        <p class="text-gray-400 mt-2">Un équipement de dernière génération pour des diagnostics d'une fiabilité irréprochable et un suivi optimal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="soins" class="py-20 md:py-32 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900">Nos Soins et Expertises</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">Un plateau technique complet pour un diagnostic et un suivi cardiologique intégral.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-heart-pulse text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Hypertension Artérielle</h3>
+                        <p class="text-gray-600 mt-2">Diagnostic précis, suivi régulier par Holter tensionnel (MAPA) et ajustement thérapeutique pour un contrôle optimal de votre tension et la prévention des complications.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-chart-line text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Électrocardiogramme (ECG)</h3>
+                        <p class="text-gray-600 mt-2">Analyse de l'activité électrique du cœur pour détecter les troubles du rythme, les signes d'infarctus ou d'autres anomalies cardiaques, au repos comme à l'effort.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-heart-circle-check text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Écho-Doppler Cardiaque</h3>
+                        <p class="text-gray-600 mt-2">Examen d'imagerie par ultrasons pour une évaluation détaillée de la morphologie du cœur, de la fonction de ses ventricules et de l'état de ses valves.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-clock text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Holter ECG</h3>
+                        <p class="text-gray-600 mt-2">Enregistrement de votre rythme cardiaque sur 24 heures pour identifier des arythmies intermittentes, des palpitations ou des malaises inexpliqués.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-person-running text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Épreuve d'Effort</h3>
+                        <p class="text-gray-600 mt-2">Surveillance de votre cœur pendant un exercice contrôlé pour diagnostiquer la maladie coronarienne et évaluer votre capacité cardiovasculaire.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                        <i class="fas fa-heart-circle-bolt text-3xl brand-red"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-gray-900">Échographie de Stress</h3>
+                        <p class="text-gray-600 mt-2">Technique avancée combinant échographie et stimulation (effort ou pharmacologique) pour une détection fine de l'ischémie myocardique.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patient Journey -->
+        <section id="visite" class="py-20 md:py-32 bg-gray-50 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900">Votre Visite : Les Étapes Clés</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">Votre prise en charge, expliquée en toute transparence.</p>
+                </div>
+                <div class="relative">
+                    <div class="step-line hidden md:block"></div>
+                    <div class="grid md:grid-cols-3 gap-16 text-center">
+                        <div class="relative">
+                            <div class="bg-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto">1</div>
+                            <h3 class="text-2xl font-bold mt-6 text-gray-900">Consultation</h3>
+                            <p class="text-gray-600 mt-2">Un entretien approfondi pour comprendre votre situation et vos antécédents.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto">2</div>
+                            <h3 class="text-2xl font-bold mt-6 text-gray-900">Diagnostic</h3>
+                            <p class="text-gray-600 mt-2">Réalisation des examens nécessaires sur place pour un diagnostic rapide et précis.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-red-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto">3</div>
+                            <h3 class="text-2xl font-bold mt-6 text-gray-900">Suivi</h3>
+                            <p class="text-gray-600 mt-2">Mise en place d'un plan de traitement et d'un suivi personnalisé pour des résultats durables.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cabinet Gallery -->
+        <section id="cabinet" class="py-20 md:py-32 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900">Le Cabinet</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">Découvrez un environnement moderne, apaisant et confidentiel.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2">
+                        <img id="main-gallery-image" src="https://placehold.co/800x600/e2e8f0/374151?text=Salle+d%27attente" alt="Image principale du cabinet" class="rounded-lg shadow-2xl w-full h-[500px] object-cover transition-all duration-300">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <img data-src="salle.jpeg" src="salle.jpeg" alt="Salle d'attente du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="accueil.jpeg" src="accueil.jpeg" alt="Accueil du cabinet" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="bureau.jpeg" src="bureau.jpeg" alt="Bureau de consultation" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                        <img data-src="echo.jpeg" src="echo.jpg" alt="Équipement médical" class="gallery-thumbnail rounded-lg h-48 w-full object-cover cursor-pointer hover:opacity-80 transition">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="avis" class="py-20 md:py-32 bg-gray-50 reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900">Ce que disent nos patients</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">Votre confiance est notre plus grande fierté.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-600 italic">"Excellent cardiologue, très compétent et à l'écoute de ses patients. Je recommande vivement."</p>
+                        <p class="font-bold text-right mt-4">- H.B.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-600 italic">"Professionnalisme et gentillesse sont au rendez vous. Cabinet très propre et bien équipé."</p>
+                        <p class="font-bold text-right mt-4">- A.F.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-600 italic">"Un médecin très humain, qui prend le temps d'expliquer les choses clairement. On se sent en confiance."</p>
+                        <p class="font-bold text-right mt-4">- K.M.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://g.co/kgs/XvnZArQ" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-800 text-white font-bold px-8 py-3 rounded-full hover:bg-black transition shadow-lg">
+                        Voir tous les avis sur Google <i class="fab fa-google ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32 bg-gray-900 text-white reveal">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold">Contact & Rendez-vous</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Contactez-nous directement ou utilisez notre système de prise de rendez-vous en ligne.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <!-- Informations et Carte -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">Informations du Cabinet</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-red-500 w-5 text-center mt-1"></i><div><h4 class="font-bold">Adresse</h4><p class="text-gray-400">119, Bd Moulay Driss 1er, 5ème étage, N°9, Quartier des Hôpitaux, Casablanca</p></div></div>
+                            <div class="flex items-start gap-4"><i class="fas fa-phone-alt text-red-500 w-5 text-center mt-1"></i><div><h4 class="font-bold">Téléphone</h4><p class="text-gray-400"><a href="tel:0522863586" class="hover:text-white">05 22 86 35 86</a> / <a href="tel:0645863586" class="hover:text-white">06 45 86 35 86</a></p></div></div>
+                            <div class="flex items-start gap-4"><i class="fas fa-envelope text-red-500 w-5 text-center mt-1"></i><div><h4 class="font-bold">Email</h4><p class="text-gray-400"><a href="mailto:dr.khadiriamine@gmail.com" class="hover:text-white">dr.khadiriamine@gmail.com</a></p></div></div>
+                            <div class="flex items-start gap-4"><i class="fas fa-clock text-red-500 w-5 text-center mt-1"></i><div><h4 class="font-bold">Horaires</h4>
+                                <p class="text-gray-400">
+                                    Lundi : 09:00–13:00, 15:00–19:00<br>
+                                    Mardi : 09:00–17:00<br>
+                                    Mercredi : 09:00–13:00, 15:00–19:00<br>
+                                    Jeudi : 09:00–17:00<br>
+                                    Vendredi : 09:00–13:00, 15:00–19:00<br>
+                                    Samedi : 09:00–13:00<br>
+                                    Dimanche : Fermé
+                                </p>
+                            </div></div>
+                        </div>
+                        <div class="mt-8">
+                            <div class="rounded-lg overflow-hidden h-64">
+                                <iframe src="https://maps.google.com/maps?q=33.572028,-7.619333&hl=fr&z=18&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=33.572028,-7.619333" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block w-full text-center brand-red-bg text-white font-bold px-6 py-3 rounded-full hover:bg-red-800 transition shadow-lg">
+                                <i class="fas fa-route mr-2"></i> Itinéraire
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Système de RDV -->
+                    <div class="bg-gray-800 p-8 rounded-lg" id="rdv-scheduler">
+                        <div id="rdv-app">
+                            <!-- Le calendrier et les créneaux seront injectés ici par le script -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2024 Dr. Amine Khadiri. Conçu avec soin.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- SCRIPTS GÉNÉRAUX ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // --- SCRIPT GALERIE ---
+            const mainImage = document.getElementById('main-gallery-image');
+            const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    if(mainImage) {
+                        mainImage.src = this.dataset.src;
+                    }
+                });
+            });
+
+            // --- NOUVEAU SYSTÈME DE PRISE DE RDV (SANS ALPINEJS) ---
+            const schedulerApp = {
+                container: document.getElementById('rdv-app'),
+                date: new Date(),
+                selectedDate: null,
+                selectedTime: null,
+                monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+                dayNames: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+
+                init() {
+                    if (!this.container) return;
+                    this.render();
+                },
+
+                render() {
+                    this.container.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <button id="prev-month-btn" class="p-2 rounded-full hover:bg-gray-700"><i class="fas fa-chevron-left"></i></button>
+                                <h3 class="text-xl font-bold">${this.monthNames[this.date.getMonth()]} ${this.date.getFullYear()}</h3>
+                                <button id="next-month-btn" class="p-2 rounded-full hover:bg-gray-700"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-2 text-center text-gray-400 mb-2">
+                                ${this.dayNames.map(day => `<div>${day}</div>`).join('')}
+                            </div>
+                            <div class="grid grid-cols-7 gap-2" id="calendar-grid-js"></div>
+                        </div>
+                        <div id="details-container-js" style="display: none;">
+                            <h3 class="text-xl font-bold my-4">Choisissez une heure pour le <span id="selected-date-text-js"></span></h3>
+                            <div class="grid grid-cols-3 gap-2" id="time-slots-grid-js"></div>
+                            <div class="mt-6" id="name-input-container-js" style="display: none;">
+                                <label for="patient-name-js" class="block font-bold mb-2">Votre Nom Complet</label>
+                                <input type="text" id="patient-name-js" placeholder="Prénom Nom" class="w-full bg-gray-700 border-gray-600 rounded-md p-3 text-white focus:ring-red-500 focus:border-red-500">
+                            </div>
+                        </div>
+                        <div id="request-rdv-container-js" class="text-center mt-8" style="display: none;">
+                            <button id="request-rdv-button-js" class="w-full md:w-auto brand-red-bg text-white font-bold px-8 py-4 rounded-full hover:bg-red-800 transition shadow-lg">
+                                <i class="fab fa-whatsapp mr-2"></i> Demander un RDV via WhatsApp
+                            </button>
+                        </div>
+                    `;
+                    this.renderCalendar();
+                    this.addEventListeners();
+                },
+
+                renderCalendar() {
+                    const calendarGrid = this.container.querySelector('#calendar-grid-js');
+                    if (!calendarGrid) return;
+                    this.date.setDate(1);
+                    const firstDayIndex = this.date.getDay();
+                    const lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
+                    calendarGrid.innerHTML = '';
+
+                    for (let i = 0; i < firstDayIndex; i++) {
+                        calendarGrid.innerHTML += `<div></div>`;
+                    }
+
+                    for (let i = 1; i <= lastDay; i++) {
+                        const dayEl = document.createElement('div');
+                        dayEl.textContent = i;
+                        dayEl.classList.add('h-10', 'flex', 'items-center', 'justify-center', 'cursor-pointer', 'calendar-date');
+                        const currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), i);
+                        const today = new Date();
+                        today.setHours(0,0,0,0);
+
+                        if (currentDate < today || currentDate.getDay() === 0) {
+                            dayEl.classList.add('text-gray-500', 'cursor-not-allowed');
+                        } else {
+                            dayEl.classList.add('hover:bg-red-700', 'hover:text-white', 'rounded-full');
+                            dayEl.addEventListener('click', () => this.selectDate(i));
+                        }
+                        
+                        if (this.selectedDate && currentDate.toDateString() === this.selectedDate.toDateString()){
+                           dayEl.classList.add('selected');
+                        }
+                        calendarGrid.appendChild(dayEl);
+                    }
+                },
+
+                addEventListeners() {
+                    this.container.querySelector('#prev-month-btn').addEventListener('click', () => this.changeMonth(-1));
+                    this.container.querySelector('#next-month-btn').addEventListener('click', () => this.changeMonth(1));
+                    this.container.querySelector('#request-rdv-button-js').addEventListener('click', () => this.requestAppointment());
+                },
+
+                changeMonth(direction) {
+                    this.date.setMonth(this.date.getMonth() + direction);
+                    this.selectedDate = null;
+                    this.selectedTime = null;
+                    this.render();
+                },
+
+                selectDate(day) {
+                    this.selectedDate = new Date(this.date.getFullYear(), this.date.getMonth(), day);
+                    this.selectedTime = null;
+                    this.render();
+                    this.renderTimeSlots();
+                },
+
+                renderTimeSlots() {
+                    const detailsContainer = this.container.querySelector('#details-container-js');
+                    const timeSlotsGrid = this.container.querySelector('#time-slots-grid-js');
+                    const selectedDateText = this.container.querySelector('#selected-date-text-js');
+                    
+                    timeSlotsGrid.innerHTML = '';
+                    selectedDateText.textContent = this.selectedDate.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+                    detailsContainer.style.display = 'block';
+
+                    const dayOfWeek = this.selectedDate.getDay();
+                    let times = [];
+                    if ([1, 3, 5].includes(dayOfWeek)) {
+                        times = this.generateTimeSlots('09:00', '13:00').concat(this.generateTimeSlots('15:00', '19:00'));
+                    } else if ([2, 4].includes(dayOfWeek)) {
+                        times = this.generateTimeSlots('09:00', '17:00');
+                    } else if (dayOfWeek === 6) {
+                        times = this.generateTimeSlots('09:00', '13:00');
+                    }
+
+                    times.forEach(time => {
+                        const timeEl = document.createElement('button');
+                        timeEl.textContent = time;
+                        timeEl.classList.add('time-slot', 'p-2', 'rounded-md', 'bg-gray-700', 'hover:bg-gray-600');
+                        timeEl.addEventListener('click', () => this.selectTime(time, timeEl));
+                        timeSlotsGrid.appendChild(timeEl);
+                    });
+                },
+
+                selectTime(time, el) {
+                    this.selectedTime = time;
+                    this.container.querySelectorAll('.time-slot').forEach(btn => btn.classList.remove('selected'));
+                    el.classList.add('selected');
+                    this.container.querySelector('#name-input-container-js').style.display = 'block';
+                    this.container.querySelector('#request-rdv-container-js').style.display = 'block';
+                },
+                
+                generateTimeSlots(start, end) {
+                    let slots = [];
+                    let [startHour, startMinute] = start.split(':').map(Number);
+                    let [endHour, endMinute] = end.split(':').map(Number);
+                    let currentTime = new Date(0,0,0,startHour, startMinute);
+                    let endTime = new Date(0,0,0,endHour, endMinute);
+
+                    while (currentTime < endTime) {
+                        slots.push(currentTime.toTimeString().substring(0, 5));
+                        currentTime.setMinutes(currentTime.getMinutes() + 30);
+                    }
+                    return slots;
+                },
+
+                requestAppointment() {
+                    const patientNameInput = this.container.querySelector('#patient-name-js');
+                    if (!this.selectedDate || !this.selectedTime) {
+                        alert("Veuillez sélectionner une date et une heure.");
+                        return;
+                    }
+                    const patientName = patientNameInput.value.trim();
+                    if (!patientName) {
+                        alert("Veuillez entrer votre nom complet.");
+                        patientNameInput.focus();
+                        return;
+                    }
+                    const formattedDate = this.selectedDate.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                    const message = `Bonjour Dr. Khadiri, je souhaite prendre rendez-vous pour ${patientName} le ${formattedDate} à ${this.selectedTime}.`;
+                    const whatsappUrl = `https://wa.me/212645863586?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            };
+            
+            schedulerApp.init();
+        });
+    </script>
+</body>
+</html>
