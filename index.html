@@ -57,13 +57,15 @@
             color: white !important;
         }
         
-        /* Language Switcher Styles */
+        /* Language & Gemini Styles */
         [data-lang="ar"] { display: none; }
         html[lang="ar"] [data-lang="fr"] { display: none; }
         html[lang="ar"] [data-lang="ar"] { display: inline-block; }
         html[dir="rtl"] .sm\:ml-3 { margin-left: 0; margin-right: 0.75rem; }
         html[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
         html[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        #gemini-result ul { list-style-position: inside; }
+        #gemini-result li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body class="bg-white text-gray-700">
@@ -268,6 +270,36 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Assistant IA Section -->
+        <section id="assistant" class="py-20 md:py-32 reveal">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900">
+                        <span data-lang="fr">Assistant d'Information Cardiologique</span>
+                        <span data-lang="ar" class="font-cairo">مساعد المعلومات لأمراض القلب</span>
+                    </h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-600">
+                        <span data-lang="fr">Posez une question d'ordre général et notre assistant IA vous fournira une réponse simple et brève.</span>
+                        <span data-lang="ar" class="font-cairo">اطرح سؤالاً عامًا وسيقدم لك مساعدنا الذكي إجابة بسيطة وموجزة.</span>
+                    </p>
+                </div>
+                <div class="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <textarea id="gemini-prompt" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500" rows="3" placeholder="Ex: Qu'est-ce qu'une palpitation ?"></textarea>
+                    <div class="text-center mt-4">
+                        <button id="gemini-generate-btn" class="brand-red-bg text-white font-bold px-8 py-3 rounded-full hover:bg-red-800 transition shadow-lg">
+                            ✨ <span data-lang="fr">Obtenir une réponse</span><span data-lang="ar" class="font-cairo">الحصول على إجابة</span>
+                        </button>
+                    </div>
+                    <div id="gemini-loading" class="text-center mt-6 hidden">
+                        <i class="fas fa-spinner fa-spin text-3xl brand-red"></i>
+                    </div>
+                    <div id="gemini-result" class="mt-6 p-6 bg-red-50 rounded-lg" style="display: none;">
+                        <!-- Gemini result here -->
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Cabinet Gallery -->
         <section id="cabinet" class="py-20 md:py-32 reveal">
@@ -441,31 +473,6 @@
                 });
             });
 
-            // --- SYSTÈME DE LANGUE ---
-            const langSwitchers = document.querySelectorAll('#lang-switcher-mobile, #lang-switcher-desktop');
-            const htmlEl = document.documentElement;
-
-            const setLanguage = (lang) => {
-                htmlEl.lang = lang;
-                htmlEl.dir = lang === 'ar' ? 'rtl' : 'ltr';
-                langSwitchers.forEach(switcher => {
-                   if(switcher) switcher.textContent = lang === 'ar' ? 'FR' : 'AR';
-                });
-                localStorage.setItem('language', lang);
-                if (typeof schedulerApp !== 'undefined') {
-                    schedulerApp.init(); // Re-render calendar with new language
-                }
-            };
-
-            langSwitchers.forEach(switcher => {
-                if(switcher) {
-                    switcher.addEventListener('click', () => {
-                        const newLang = htmlEl.lang === 'fr' ? 'ar' : 'fr';
-                        setLanguage(newLang);
-                    });
-                }
-            });
-
              // --- NOUVEAU SYSTÈME DE PRISE DE RDV ---
             const schedulerApp = {
                 container: document.getElementById('rdv-app'),
@@ -487,7 +494,7 @@
                 },
 
                 render() {
-                    const currentLang = htmlEl.lang || 'fr';
+                    const currentLang = document.documentElement.lang || 'fr';
                     this.container.innerHTML = `
                         <div>
                             <div class="flex items-center justify-between mb-4">
@@ -578,7 +585,7 @@
                     const selectedDateText = this.container.querySelector('#selected-date-text-js');
                     
                     timeSlotsGrid.innerHTML = '';
-                    selectedDateText.textContent = this.selectedDate.toLocaleDateString(htmlEl.lang, { weekday: 'long', day: 'numeric', month: 'long' });
+                    selectedDateText.textContent = this.selectedDate.toLocaleDateString(document.documentElement.lang, { weekday: 'long', day: 'numeric', month: 'long' });
                     detailsContainer.style.display = 'block';
 
                     const dayOfWeek = this.selectedDate.getDay();
@@ -625,17 +632,17 @@
                 requestAppointment() {
                     const patientNameInput = this.container.querySelector('#patient-name-js');
                     if (!this.selectedDate || !this.selectedTime) {
-                        alert(htmlEl.lang === 'fr' ? "Veuillez sélectionner une date et une heure." : "الرجاء اختيار تاريخ وساعة.");
+                        alert(document.documentElement.lang === 'fr' ? "Veuillez sélectionner une date et une heure." : "الرجاء اختيار تاريخ وساعة.");
                         return;
                     }
                     const patientName = patientNameInput.value.trim();
                     if (!patientName) {
-                        alert(htmlEl.lang === 'fr' ? "Veuillez entrer votre nom complet." : "الرجاء إدخال اسمكم الكامل.");
+                        alert(document.documentElement.lang === 'fr' ? "Veuillez entrer votre nom complet." : "الرجاء إدخال اسمكم الكامل.");
                         patientNameInput.focus();
                         return;
                     }
-                    const formattedDate = this.selectedDate.toLocaleDateString(htmlEl.lang, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                    const message = htmlEl.lang === 'fr' 
+                    const formattedDate = this.selectedDate.toLocaleDateString(document.documentElement.lang, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                    const message = document.documentElement.lang === 'fr' 
                         ? `Bonjour Dr. Khadiri, je souhaite prendre rendez-vous pour ${patientName} le ${formattedDate} à ${this.selectedTime}.`
                         : `السلام عليكم دكتور أمين خديـري، أود حجز موعد لـ ${patientName} يوم ${formattedDate} على الساعة ${this.selectedTime}.`;
                     const whatsappUrl = `https://wa.me/212645863586?text=${encodeURIComponent(message)}`;
@@ -643,12 +650,87 @@
                 }
             };
             
+            const langSwitcherDesktop = document.getElementById('lang-switcher-desktop');
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                document.querySelectorAll('#lang-switcher-mobile, #lang-switcher-desktop').forEach(s => s.textContent = lang === 'ar' ? 'FR' : 'AR');
+                localStorage.setItem('language', lang);
+                schedulerApp.init();
+            };
+            
+            document.querySelectorAll('#lang-switcher-mobile, #lang-switcher-desktop').forEach(s => {
+                s.addEventListener('click', () => {
+                    const newLang = document.documentElement.lang === 'fr' ? 'ar' : 'fr';
+                    setLanguage(newLang);
+                });
+            });
+
             const savedLang = localStorage.getItem('language');
-            if (savedLang) {
-                setLanguage(savedLang);
-            } else {
-                setLanguage('fr'); // Default language
-            }
+            setLanguage(savedLang || 'fr');
+
+            // --- SCRIPT GEMINI ---
+            const generateBtn = document.getElementById('gemini-generate-btn');
+            const promptInput = document.getElementById('gemini-prompt');
+            const loadingEl = document.getElementById('gemini-loading');
+            const resultEl = document.getElementById('gemini-result');
+
+            generateBtn.addEventListener('click', async () => {
+                const userPrompt = promptInput.value.trim();
+                const currentLang = document.documentElement.lang || 'fr';
+                const alertMessages = {
+                    fr: "Veuillez poser une question.",
+                    ar: "الرجاء طرح سؤال."
+                };
+
+                if (!userPrompt) {
+                    alert(alertMessages[currentLang]);
+                    return;
+                }
+
+                loadingEl.style.display = 'block';
+                resultEl.style.display = 'none';
+                resultEl.innerHTML = '';
+
+                const fullPrompt = `En tant qu'assistant médical dans un cabinet de cardiologie, répondez à la question générale suivante de manière TRÈS BRÈVE et SIMPLE (2-3 phrases maximum) : '${userPrompt}'. Ne donnez AUCUN conseil médical, diagnostic ou pronostic. Terminez IMPÉRATIVEMENT votre réponse par la phrase suivante, traduite dans la langue de la question (français ou arabe) : 'Pour un avis médical précis, il est essentiel de prendre rendez-vous pour une consultation.'`;
+                
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: fullPrompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; 
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Erreur API: ${response.statusText}`);
+                    }
+                    
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        
+                        let text = result.candidates[0].content.parts[0].text;
+                        resultEl.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                       resultEl.innerHTML = '<p>Désolé, une erreur est survenue. Veuillez réessayer.</p>';
+                    }
+
+                } catch (error) {
+                    console.error('Erreur Gemini:', error);
+                    resultEl.innerHTML = '<p>Désolé, impossible de contacter l\'assistant pour le moment.</p>';
+                } finally {
+                    loadingEl.style.display = 'none';
+                    resultEl.style.display = 'block';
+                }
+            });
         });
     </script>
 </body>
