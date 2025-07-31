@@ -71,24 +71,24 @@
     <!-- Header -->
     <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 py-3">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between lg:justify-center items-center">
                 <a href="#" class="flex items-center min-w-0">
                     <img src="logo.jpeg" alt="Logo du cabinet" class="h-12 w-12 sm:h-16 sm:w-16 mr-2 sm:mr-4 flex-shrink-0">
                     <div class="min-w-0">
                         <div class="flex flex-col sm:flex-row sm:items-center">
-                            <h2 class="text-base sm:text-xl font-bold text-gray-900 whitespace-nowrap">Dr. AMINE KHADIRI</h2>
-                            <h2 class="text-base sm:text-xl font-cairo font-bold text-gray-900 whitespace-nowrap sm:ml-3">د. أمين خديـري</h2>
+                            <h2 class="text-base sm:text-xl font-bold text-gray-900">Dr. AMINE KHADIRI</h2>
+                            <h2 class="text-base sm:text-xl font-cairo font-bold text-gray-900 sm:ml-3">دكتور أمين خديـري</h2>
                         </div>
                         <div class="border-t-2 border-red-700 my-1"></div>
                         <div class="flex flex-col sm:flex-row sm:items-center">
-                            <p class="text-xs sm:text-sm font-semibold text-gray-500 whitespace-nowrap">CABINET DE CARDIOLOGIE</p>
-                            <p class="text-sm sm:text-md font-cairo font-semibold text-gray-500 whitespace-nowrap sm:ml-3">عيادة أمراض القلب و الشرايين</p>
+                            <p class="text-xs sm:text-sm font-semibold text-gray-500">CABINET DE CARDIOLOGIE</p>
+                            <p class="text-sm sm:text-md font-cairo font-semibold text-gray-500 sm:ml-3">عيادة أمراض القلب و الشرايين</p>
                         </div>
                     </div>
                 </a>
-                <div class="flex items-center">
-                    <button id="lang-switcher" class="font-bold text-gray-600 hover:brand-red transition mr-2 p-2">AR</button>
-                    <button id="mobile-menu-button" class="lg:hidden p-2"><i class="fas fa-bars text-2xl"></i></button>
+                <div class="flex items-center lg:hidden">
+                    <button id="lang-switcher-mobile" class="font-bold text-gray-600 hover:brand-red transition mr-2 p-2">AR</button>
+                    <button id="mobile-menu-button" class="p-2"><i class="fas fa-bars text-2xl"></i></button>
                 </div>
             </div>
             <nav class="hidden lg:flex justify-center items-center space-x-8 text-gray-600 pt-4 border-t mt-3">
@@ -99,6 +99,7 @@
                 <a href="#avis" class="nav-link hover:brand-red transition"><span data-lang="fr">Avis</span><span data-lang="ar">آراء المرضى</span></a>
                 <a href="#contact" class="nav-link hover:brand-red transition"><span data-lang="fr">Contact</span><span data-lang="ar">اتصل بنا</span></a>
                 <a href="#rdv-calendar" class="nav-link brand-red-bg text-white font-bold px-6 py-2 rounded-full hover:bg-red-800 transition shadow-lg hover:shadow-xl ml-4"><span data-lang="fr">Rendez-vous</span><span data-lang="ar">أخذ موعد</span></a>
+                <button id="lang-switcher-desktop" class="font-bold text-gray-600 hover:brand-red transition p-2">AR</button>
             </nav>
         </div>
         <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
@@ -441,28 +442,31 @@
             });
 
             // --- SYSTÈME DE LANGUE ---
-            const langSwitcher = document.getElementById('lang-switcher');
+            const langSwitchers = document.querySelectorAll('#lang-switcher-mobile, #lang-switcher-desktop');
             const htmlEl = document.documentElement;
 
             const setLanguage = (lang) => {
                 htmlEl.lang = lang;
                 htmlEl.dir = lang === 'ar' ? 'rtl' : 'ltr';
-                langSwitcher.textContent = lang === 'ar' ? 'FR' : 'AR';
+                langSwitchers.forEach(switcher => {
+                   if(switcher) switcher.textContent = lang === 'ar' ? 'FR' : 'AR';
+                });
                 localStorage.setItem('language', lang);
-                schedulerApp.init(); // Re-render calendar with new language
+                if (typeof schedulerApp !== 'undefined') {
+                    schedulerApp.init(); // Re-render calendar with new language
+                }
             };
 
-            langSwitcher.addEventListener('click', () => {
-                const newLang = htmlEl.lang === 'fr' ? 'ar' : 'fr';
-                setLanguage(newLang);
+            langSwitchers.forEach(switcher => {
+                if(switcher) {
+                    switcher.addEventListener('click', () => {
+                        const newLang = htmlEl.lang === 'fr' ? 'ar' : 'fr';
+                        setLanguage(newLang);
+                    });
+                }
             });
 
-            const savedLang = localStorage.getItem('language');
-            if (savedLang) {
-                setLanguage(savedLang);
-            }
-
-            // --- NOUVEAU SYSTÈME DE PRISE DE RDV ---
+             // --- NOUVEAU SYSTÈME DE PRISE DE RDV ---
             const schedulerApp = {
                 container: document.getElementById('rdv-app'),
                 date: new Date(),
@@ -633,13 +637,18 @@
                     const formattedDate = this.selectedDate.toLocaleDateString(htmlEl.lang, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                     const message = htmlEl.lang === 'fr' 
                         ? `Bonjour Dr. Khadiri, je souhaite prendre rendez-vous pour ${patientName} le ${formattedDate} à ${this.selectedTime}.`
-                        : `السلام عليكم دكتور خديـري، أود حجز موعد لـ ${patientName} يوم ${formattedDate} على الساعة ${this.selectedTime}.`;
+                        : `السلام عليكم دكتور أمين خديـري، أود حجز موعد لـ ${patientName} يوم ${formattedDate} على الساعة ${this.selectedTime}.`;
                     const whatsappUrl = `https://wa.me/212645863586?text=${encodeURIComponent(message)}`;
                     window.open(whatsappUrl, '_blank');
                 }
             };
             
-            schedulerApp.init();
+            const savedLang = localStorage.getItem('language');
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                setLanguage('fr'); // Default language
+            }
         });
     </script>
 </body>
